@@ -28,4 +28,3 @@ function updateQuery(event) {
   )
 }
 
-test
