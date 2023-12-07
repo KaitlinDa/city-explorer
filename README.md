@@ -63,4 +63,4 @@ Actual time needed to complete: 2 hours
 
 ## Lighthouse
 
-![Lighthouse score](img/lighthouse.png).
+![Lighthouse score](img/lighthouse.png)
