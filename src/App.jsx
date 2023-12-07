@@ -6,6 +6,7 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 export default function App() {
   const [location, setLocation] = useState({ display_name: "", lat: "", lon: "" });
   const [searchQuery, setSearchQuery] = useState('');
+  const [mapImageUrl, setMapImageUrl] = useState('');
 
   async function getLocation() {
     try {
@@ -17,6 +18,9 @@ export default function App() {
         lat: locationObj.lat,
         lon: locationObj.lon
       });
+
+      const mapAPI = `https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${locationObj.lat},${locationObj.lon}&zoom=12`;
+      setMapImageUrl(mapAPI);
     } catch (error) {
       console.error('Error fetching location data:', error);
     }
@@ -40,12 +44,19 @@ export default function App() {
             <button className="btn btn-primary" onClick={getLocation}>Explore!</button>
           </div>
           {location.display_name && (
-            <div className="card">
-              <div className="card-body">
-                <h5 className="card-title">{location.display_name}</h5>
-                <p className="card-text">Latitude: {location.lat}</p>
-                <p className="card-text">Longitude: {location.lon}</p>
+            <div>
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">{location.display_name}</h5>
+                  <p className="card-text">Latitude: {location.lat}</p>
+                  <p className="card-text">Longitude: {location.lon}</p>
+                </div>
               </div>
+              {mapImageUrl && (
+                <div className="map-container mt-3">
+                  <img src={mapImageUrl} alt="Map" className="img-fluid" />
+                </div>
+              )}
             </div>
           )}
         </div>
