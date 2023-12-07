@@ -3,28 +3,53 @@ import axios from 'axios';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-
 export default function App() {
-  const [location, setLocation] = useState({display_name: "info about ???"});
+  const [location, setLocation] = useState({ display_name: "", lat: "", lon: "" });
   const [searchQuery, setSearchQuery] = useState('');
 
   async function getLocation() {
-    const API = `https://us1.locationiq.com/v1/search.php?key=${API_KEY}&q=${searchQuery}&format=json`;
-    const response = await axios.get(API);
-    const locationObj = response.data[0];
-    setLocation(locationObj);
-
-    console.log(locationObj);
+    try {
+      const API = `https://us1.locationiq.com/v1/search.php?key=${API_KEY}&q=${searchQuery}&format=json`;
+      const response = await axios.get(API);
+      const locationObj = response.data[0];
+      setLocation({
+        display_name: locationObj.display_name,
+        lat: locationObj.lat,
+        lon: locationObj.lon
+      });
+    } catch (error) {
+      console.error('Error fetching location data:', error);
+    }
   }
+
   function updateQuery(event) {
     setSearchQuery(event.target.value);
   }
 
   return (
-    <>
-      <input onChange={updateQuery} />
-      <button onClick={getLocation}>Explore!</button>
-      <h2>The city is: {location.display_name}</h2>
-    </>
-  )
+    <div className="container my-4">
+      <div className="row">
+        <div className="col-md-6 offset-md-3">
+          <div className="input-group mb-3">
+            <input 
+              type="text"
+              className="form-control"
+              placeholder="Enter city name"
+              onChange={updateQuery}
+            />
+            <button className="btn btn-primary" onClick={getLocation}>Explore!</button>
+          </div>
+          {location.display_name && (
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">{location.display_name}</h5>
+                <p className="card-text">Latitude: {location.lat}</p>
+                <p className="card-text">Longitude: {location.lon}</p>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
