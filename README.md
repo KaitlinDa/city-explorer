@@ -39,9 +39,8 @@ API Integration (LocationIQ):
 The application relies on the LocationIQ API to retrieve geographical information based on user input. This API serves as the core data source for the City Explorer, enabling the retrieval of city details, latitude, longitude, and other relevant location-based data.
 
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+12/7/2023 - Fully functional live server where you can input a city and its longitutde and latitude will pop up along with a correct map.
 
 ## Credit and Collaborations
 
@@ -52,12 +51,16 @@ ChatGPT
 ![Dataflow between application](img/dataflow.png)
 
 ## Time Estimates
-Name of feature: 
+Name of feature: Map
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 1 hour
 
-Start time: 
+Start time: 11:30pm 
 
-Finish time: 
+Finish time: 1:30am
 
-Actual time needed to complete: 
+Actual time needed to complete: 2 hours
+
+## Lighthouse
+
+![Lighthouse score](img/lighthouse.png).
