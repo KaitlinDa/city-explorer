@@ -19,6 +19,12 @@ export default function App() {
         lon: locationObj.lon
       });
 
+
+// Make request to weather
+      const weatherURL = `http://localhost:3000/weather?lat=47.6038321&lon=-122.330062&searchQuery=Seattle`;
+      const weatherResponse = await axios.get(weatherURL);
+      console.log (weatherResponse.data);
+
       const mapAPI = `https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${locationObj.lat},${locationObj.lon}&zoom=12`;
       setMapImageUrl(mapAPI);
     } catch (error) {
